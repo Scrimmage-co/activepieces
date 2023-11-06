@@ -137,6 +137,11 @@ export class StepTypeSidebarComponent implements OnInit, AfterViewInit {
     const coreItemsDetails$ = this._showTriggers
       ? this.store.select(BuilderSelectors.selectFlowItemDetailsForCoreTriggers)
       : this.store.select(BuilderSelectors.selectCoreFlowItemsDetails);
+    const gamificationItemsDetails$ = this._showTriggers
+      ? this.store.select(
+          BuilderSelectors.selectFlowItemDetailsForGamificationTriggers
+        )
+      : this.store.select(BuilderSelectors.selectGamificationFlowItemsDetails);
     const customPiecesItemDetails$ = this._showTriggers
       ? this.store.select(
           BuilderSelectors.selectFlowItemDetailsForCustomPiecesTriggers
@@ -164,6 +169,12 @@ export class StepTypeSidebarComponent implements OnInit, AfterViewInit {
     this.tabsAndTheirLists.push({
       displayName: $localize`Core`,
       list$: this.applySearchToObservable(coreItemsDetails$),
+      emptyListText: $localize`Oops! We didn't find any results.`,
+    });
+
+    this.tabsAndTheirLists.push({
+      displayName: $localize`Gamification`,
+      list$: this.applySearchToObservable(gamificationItemsDetails$),
       emptyListText: $localize`Oops! We didn't find any results.`,
     });
 

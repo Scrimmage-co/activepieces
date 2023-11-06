@@ -1,0 +1,8 @@
+config:
+  activepieces:containerCpu: "400"
+  activepieces:containerInstances: "1"
+  activepieces:containerMemory: "600"
+  activepieces:dbInstanceClass: test
+  activepieces:redisNodeType: None
+  activepieces:usePostgres: "true"
+  activepieces:useRedis: "false"

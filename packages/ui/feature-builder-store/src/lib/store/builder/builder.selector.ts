@@ -358,9 +358,10 @@ const selectMissingStepRecommendedFlowItemsDetails = createSelector(
 export const selectFlowItemDetailsForCoreTriggers = createSelector(
   selectAllFlowItemsDetails,
   (state: FlowItemsDetailsState) => {
-    return state.coreTriggerFlowItemsDetails.filter(
-      (details) => details.type !== TriggerType.EMPTY
-    );
+    return state.coreTriggerFlowItemsDetails.filter((details) => {
+      console.log('details', details);
+      return details.type !== TriggerType.EMPTY;
+    });
   }
 );
 export const selectFlowItemDetailsForCustomPiecesActions = createSelector(
@@ -600,6 +601,22 @@ const selectFlowTriggerIsTested = createSelector(selectCurrentFlow, (flow) => {
       return !!flow.version.trigger.settings.inputUiInfo.currentSelectedData;
   }
 });
+const selectFlowItemDetailsForGamificationTriggers = createSelector(
+  selectAllFlowItemsDetails,
+  (flowItemsDetails) => {
+    return flowItemsDetails.customPiecesTriggersFlowItemDetails.filter((f) =>
+      f.extra?.pieceName.includes('scrimmage')
+    );
+  }
+);
+const selectGamificationFlowItemsDetails = createSelector(
+  selectAllFlowItemsDetails,
+  (flowItemsDetails) => {
+    return flowItemsDetails.customPiecesActionsFlowItemDetails.filter((f) =>
+      f.extra?.pieceName.includes('scrimmage')
+    );
+  }
+);
 export const BuilderSelectors = {
   selectReadOnly,
   selectViewMode,
@@ -655,4 +672,6 @@ export const BuilderSelectors = {
   selectFlowTriggerIsTested,
   selectAppConnectionsDropdownOptionsForAppWithIds,
   selectAppConnectionsDropdownOptionsWithIds,
+  selectFlowItemDetailsForGamificationTriggers,
+  selectGamificationFlowItemsDetails,
 };

@@ -1,0 +1,44 @@
+{
+  "name": "pieces-scrimmage-quests",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/pieces/scrimmage-quests/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/packages/pieces/scrimmage-quests",
+        "tsConfig": "packages/pieces/scrimmage-quests/tsconfig.lib.json",
+        "packageJson": "packages/pieces/scrimmage-quests/package.json",
+        "main": "packages/pieces/scrimmage-quests/src/index.ts",
+        "assets": [
+          "packages/pieces/scrimmage-quests/*.md"
+        ],
+        "buildableProjectDepsInPackageJsonType": "dependencies",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs pieces-scrimmage-quests {args.ver} {args.tag}",
+      "dependsOn": [
+        "build"
+      ]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "packages/pieces/scrimmage-quests/**/*.ts",
+          "packages/pieces/scrimmage-quests/package.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,5 +1,8 @@
 @import "../.././../../../../core/src/assets/scss/variables.scss";
 @import "../.././../../../../core/src/assets/scss/derived-variables.scss";
+.custom-color {
+  background: #d3dffc !important;
+}
 .flow-item {
   /* Auto Layout */
   display: flex;

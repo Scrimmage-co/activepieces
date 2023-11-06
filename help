@@ -1,0 +1,10 @@
+Building:
+1. docker buildx build --build-arg BUILDKIT_INLINE_CACHE=1 --progress=plain .
+2. aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 473860850071.dkr.ecr.us-east-2.amazonaws.com
+3. docker tag b2f9c9f46b3340e06f5458f6074cb17beead89196cfe4e9f26ba79daf217eaec 473860850071.dkr.ecr.us-east-2.amazonaws.com/activepieces
+4. docker push 473860850071.dkr.ecr.us-east-2.amazonaws.com/activepieces
+
+Setup:
+1. Create new user in DB
+2. Create new project in DB
+3. Login via https://nevada.apps.scrimmage.co/_workflows/api/v1/authentication/sign-in

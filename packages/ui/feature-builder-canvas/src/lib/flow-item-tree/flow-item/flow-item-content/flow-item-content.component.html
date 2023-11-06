@@ -3,6 +3,7 @@
   [class.non-empty-step]="true"
   [class.empty-step]="false">
   <div class="flow-item ap-flex ap-items-center ap-border-solid ap-border-border ap-border-[1px]"
+    [class.custom-color]="_flowItem.displayName.toLowerCase().includes('quest')"
     [class.selected-non-empty]="selected"
     [class.selected-empty]="false"
     [class.empty-trigger]="_flowItem.type === TriggerType.EMPTY" (click)="selectStep()">
