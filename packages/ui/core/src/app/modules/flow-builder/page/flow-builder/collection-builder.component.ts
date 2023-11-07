@@ -103,6 +103,7 @@ export class CollectionBuilderComponent implements OnInit, OnDestroy {
     automaticLayout: true,
   };
   setTitle$: Observable<void>;
+  hideHeader: boolean;
   constructor(
     private store: Store,
     private actRoute: ActivatedRoute,
@@ -119,6 +120,10 @@ export class CollectionBuilderComponent implements OnInit, OnDestroy {
     private telemetryService: TelemetryService,
     public builderAutocompleteService: BuilderAutocompleteMentionsDropdownService
   ) {
+    const urlParamsRaw = window.location.search;
+    const urlParams = new URLSearchParams(urlParamsRaw);
+    this.hideHeader = urlParams.get('hideHeader') === 'true';
+
     this.listenToGraphChanges();
     this.dataInsertionPopupHidden$ =
       this.builderAutocompleteService.currentAutocompleteInputId$.pipe(

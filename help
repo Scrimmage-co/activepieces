@@ -6,5 +6,23 @@ Building:
 
 Setup:
 1. Create new user in DB
+
+INSERT INTO "user" ("id", "created", "updated", "email", "firstName", "lastName", "password", "status", "trackEvents", "newsLetter", "imageUrl", "title", "externalId") VALUES
+('WwbA3xIZlm7B42m4qrnNC', '2023-11-02 10:38:14', '2023-11-02 10:38:14', 'dev@ap.com', 'firstName', 'lastName', '$2b$10$uWW5m56gVjLzLWvak6VMoOjb8iqIId5NZ6oQnAiwwwljAU9/d.FCK', 'VERIFIED', '0', '0', NULL, NULL, NULL);
+
 2. Create new project in DB
+
+INSERT INTO "project" ("id", "created", "updated", "ownerId", "displayName", "notifyStatus", "type", "platformId", "externalId") VALUES
+('WwbA3xIZlm7B42m4qrnNC', '2023-11-02 10:38:14', '2023-11-02 10:38:14', 'WwbA3xIZlm7B42m4qrnNC', 'firstName''s Project', 'ALWAYS', 'STANDALONE', NULL, NULL);
+
+
 3. Login via https://nevada.apps.scrimmage.co/_workflows/api/v1/authentication/sign-in
+
+
+Locally <base href="/" />, in production <base href="/_workflows/" />
+
+
+userData=
+{"id":"WwbA3xIZlm7B42m4qrnNC","created":"2023-11-02T10:38:14.000Z","updated":"2023-11-02T10:38:14.000Z","email":"dev@ap.com","firstName":"firstName","lastName":"lastName","status":"VERIFIED","trackEvents":false,"newsLetter":false,"imageUrl":null,"title":null,"externalId":null,"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjEifQ.eyJpZCI6Ild3YkEzeElabG03QjQybTRxcm5OQyIsInR5cGUiOiJVU0VSIiwicHJvamVjdElkIjoiTHhpT2FtMkNiSndaSmYxekwyVVVYIiwicHJvamVjdFR5cGUiOiJTVEFOREFMT05FIiwiaWF0IjoxNjk5MzQ5NDQ3LCJleHAiOjIzMDQxNDk0NDcsImlzcyI6ImFjdGl2ZXBpZWNlcyJ9.We41_his95wJ0de6TBXYAq8gCSYvg-Q5w4m9lC8xvAs","projectId":"LxiOam2CbJwZJf1zL2UUX"}
+
+hideHeader=true
