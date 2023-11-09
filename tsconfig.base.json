@@ -183,11 +183,35 @@
         "packages/pieces/salesforce/src/index.ts"
       ],
       "@activepieces/piece-schedule": ["packages/pieces/schedule/src/index.ts"],
+      "@activepieces/piece-scrimmage-actions-give-quest": [
+        "packages/pieces/scrimmage-actions-give-quest/src/index.ts"
+      ],
+      "@activepieces/piece-scrimmage-actions-give-quests": [
+        "packages/pieces/scrimmage-actions-give-quests/src/index.ts"
+      ],
+      "@activepieces/piece-scrimmage-actions-give-random-quests": [
+        "packages/pieces/scrimmage-actions-give-random-quests/src/index.ts"
+      ],
       "@activepieces/piece-scrimmage-on-game-event": [
         "packages/pieces/scrimmage-on-game-event/src/index.ts"
       ],
       "@activepieces/piece-scrimmage-quests": [
         "packages/pieces/scrimmage-quests/src/index.ts"
+      ],
+      "@activepieces/piece-scrimmage-triggers-quest-completed": [
+        "packages/pieces/scrimmage-triggers-quest-completed/src/index.ts"
+      ],
+      "@activepieces/piece-scrimmage-triggers-redeem-made": [
+        "packages/pieces/scrimmage-triggers-redeem-made/src/index.ts"
+      ],
+      "@activepieces/piece-scrimmage-triggers-rewardable-event-received": [
+        "packages/pieces/scrimmage-triggers-rewardable-event-received/src/index.ts"
+      ],
+      "@activepieces/piece-scrimmage-triggers-user-level-up": [
+        "packages/pieces/scrimmage-triggers-user-level-up/src/index.ts"
+      ],
+      "@activepieces/piece-scrimmage-triggers-user-sign-up": [
+        "packages/pieces/scrimmage-triggers-user-sign-up/src/index.ts"
       ],
       "@activepieces/piece-sendfox": ["packages/pieces/sendfox/src/index.ts"],
       "@activepieces/piece-sendgrid": ["packages/pieces/sendgrid/src/index.ts"],

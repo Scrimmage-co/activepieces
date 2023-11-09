@@ -1,0 +1,44 @@
+{
+  "name": "pieces-scrimmage-triggers-quest-completed",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/pieces/scrimmage-triggers-quest-completed/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/packages/pieces/scrimmage-triggers-quest-completed",
+        "tsConfig": "packages/pieces/scrimmage-triggers-quest-completed/tsconfig.lib.json",
+        "packageJson": "packages/pieces/scrimmage-triggers-quest-completed/package.json",
+        "main": "packages/pieces/scrimmage-triggers-quest-completed/src/index.ts",
+        "assets": [
+          "packages/pieces/scrimmage-triggers-quest-completed/*.md"
+        ],
+        "buildableProjectDepsInPackageJsonType": "dependencies",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs pieces-scrimmage-triggers-quest-completed {args.ver} {args.tag}",
+      "dependsOn": [
+        "build"
+      ]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "packages/pieces/scrimmage-triggers-quest-completed/**/*.ts",
+          "packages/pieces/scrimmage-triggers-quest-completed/package.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

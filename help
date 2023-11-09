@@ -16,7 +16,8 @@ INSERT INTO "project" ("id", "created", "updated", "ownerId", "displayName", "no
 ('WwbA3xIZlm7B42m4qrnNC', '2023-11-02 10:38:14', '2023-11-02 10:38:14', 'WwbA3xIZlm7B42m4qrnNC', 'firstName''s Project', 'ALWAYS', 'STANDALONE', NULL, NULL);
 
 
-3. Login via https://nevada.apps.scrimmage.co/_workflows/api/v1/authentication/sign-in
+3. Create default folders
+
 
 
 Locally <base href="/" />, in production <base href="/_workflows/" />

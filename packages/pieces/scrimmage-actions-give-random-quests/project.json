@@ -1,0 +1,44 @@
+{
+  "name": "pieces-scrimmage-actions-give-random-quests",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/pieces/scrimmage-actions-give-random-quests/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/packages/pieces/scrimmage-actions-give-random-quests",
+        "tsConfig": "packages/pieces/scrimmage-actions-give-random-quests/tsconfig.lib.json",
+        "packageJson": "packages/pieces/scrimmage-actions-give-random-quests/package.json",
+        "main": "packages/pieces/scrimmage-actions-give-random-quests/src/index.ts",
+        "assets": [
+          "packages/pieces/scrimmage-actions-give-random-quests/*.md"
+        ],
+        "buildableProjectDepsInPackageJsonType": "dependencies",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs pieces-scrimmage-actions-give-random-quests {args.ver} {args.tag}",
+      "dependsOn": [
+        "build"
+      ]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "packages/pieces/scrimmage-actions-give-random-quests/**/*.ts",
+          "packages/pieces/scrimmage-actions-give-random-quests/package.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
