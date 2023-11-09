@@ -28,16 +28,17 @@ export interface GiveRandomQuestsResponseDto {
 }
 
 export const scrimmageCommon = {
-  baseUrl: "https://coinflip.apps.scrimmage.co",
+  baseUrl: `https://${process.env['SCRIMMAGE_PARTNER_ID'] || 'nanachi'}.apps.scrimmage.co`,
   namespace: "production",
-  token: "LzsEZwaYlNL/wKU+Q98eKCsOhG0QulefxXV/3E4LZm373hH5ip263EnwffSv4rOC",
+  p2eToken: `${process.env['WEB3_SERVICE_AUTH_TOKEN'] || '2rIS8NxVYE3G1kUVfBLt02vZ3M64ExjQI2yzKlxX2OKbaURiIr4b4zut6sk31UA9'}`,
+  nbcToken: `${process.env['NBC_SERVICE_AUTH_TOKEN'] || 'secret'}`,
   subscribeWebhook: async (eventType: string, event: string, webhookUrl: string) => {
     const request: HttpRequest = {
       method: HttpMethod.POST,
       url: `${scrimmageCommon.baseUrl}/nbc/webhooks/`,
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'Token ' + scrimmageCommon.token,
+        'Authorization': 'Token ' + scrimmageCommon.nbcToken,
         'Scrimmage-Namespace': scrimmageCommon.namespace,
       },
       body: {
@@ -57,7 +58,7 @@ export const scrimmageCommon = {
       url: `${scrimmageCommon.baseUrl}/nbc/webhooks/${webhookId}`,
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'Token ' + scrimmageCommon.token,
+        'Authorization': 'Token ' + scrimmageCommon.nbcToken,
         'Scrimmage-Namespace': scrimmageCommon.namespace,
       },
       queryParams: {},
@@ -71,7 +72,7 @@ export const scrimmageCommon = {
       url: `${scrimmageCommon.baseUrl}/p2e/players?limit=100000`,
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'Token ' + scrimmageCommon.token,
+        'Authorization': 'Token ' + scrimmageCommon.p2eToken,
         'Scrimmage-Namespace': scrimmageCommon.namespace,
       },
       queryParams: {},
@@ -90,7 +91,7 @@ export const scrimmageCommon = {
       url: `${scrimmageCommon.baseUrl}/p2e/quests`,
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'Token ' + scrimmageCommon.token,
+        'Authorization': 'Token ' + scrimmageCommon.p2eToken,
         'Scrimmage-Namespace': scrimmageCommon.namespace,
       },
       queryParams: {},
@@ -109,7 +110,7 @@ export const scrimmageCommon = {
       url: `${scrimmageCommon.baseUrl}/p2e/players/${userId}/quests`,
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'Token ' + scrimmageCommon.token,
+        'Authorization': 'Token ' + scrimmageCommon.p2eToken,
         'Scrimmage-Namespace': scrimmageCommon.namespace,
       },
       body: giveQuestDto,
@@ -130,7 +131,7 @@ export const scrimmageCommon = {
       url: `${scrimmageCommon.baseUrl}/p2e/players/${userId}/quests/bulk`,
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'Token ' + scrimmageCommon.token,
+        'Authorization': 'Token ' + scrimmageCommon.p2eToken,
         'Scrimmage-Namespace': scrimmageCommon.namespace,
       },
       body: giveQuestsDto,
@@ -151,7 +152,7 @@ export const scrimmageCommon = {
       url: `${scrimmageCommon.baseUrl}/p2e/players/${userId}/quests/random`,
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'Token ' + scrimmageCommon.token,
+        'Authorization': 'Token ' + scrimmageCommon.p2eToken,
         'Scrimmage-Namespace': scrimmageCommon.namespace,
       },
       body: giveRandomQuestsDto,
