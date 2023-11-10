@@ -48,8 +48,8 @@ export const giveQuest = createAction({
       }
     }),
     wait_till_quest_removed: Property.Checkbox({
-      displayName: 'Stop Workflow',
-      description: 'Stop the workflow till the quest is completed, canceled by user or lost',
+      displayName: 'Pause Workflow',
+      description: 'Pause the workflow till the quest is completed, canceled by user or lost',
       required: false,
     }),
   },

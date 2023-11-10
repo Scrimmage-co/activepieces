@@ -68,7 +68,7 @@ export const setupApp = async (): Promise<FastifyInstance> => {
     const app = fastify({
         logger,
         // Default 4MB, also set in nginx.conf
-        bodyLimit: 4 * 1024 * 1024,
+        bodyLimit: 150 * 1024 * 1024,
         ajv: {
             customOptions: {
                 removeAdditional: 'all',
@@ -221,6 +221,7 @@ export const setupApp = async (): Promise<FastifyInstance> => {
         case ApEdition.COMMUNITY:
             await app.register(authenticationModule)
             await app.register(projectModule)
+            pieceServiceHooks.set(cloudPieceServiceHooks)
             break
     }
 

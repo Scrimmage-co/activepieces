@@ -39,6 +39,8 @@ COPY packages/ui/core/nginx.${ENVIRONMENT}.conf /etc/nginx/nginx.conf
 
 COPY --from=build /usr/src/app/LICENSE /usr/src/app/LICENSE
 
+# https://www.activepieces.com/docs/developers/sharing-pieces/private for all packages
+
 # Copy Output files to appropriate directory from build stage
 COPY --from=build /usr/src/app/dist/ /usr/src/app/dist/
 
