@@ -82,3 +82,6 @@ userData=
 hideHeader=true
 
 kubectl cp -n nanachi ./activepieces-piece-scrimmage-triggers-user-sign-up-0.0.1.tgz activepieces-799cd594b6-7mgcd:/usr/src/app/dist/packages/pieces/activepieces-piece-scrimmage-triggers-user-sign-up-0.0.1.tgz
+
+insert into public.piece_metadata (id, created, updated, name, displayName, logoUrl, description, version, minimumSupportedRelease, maximumSupportedRelease, actions, triggers, projectId, auth, pieceType, packageType, archiveId)
+values  ('2', '2023-11-10 13:38:44.710914 +00:00', '2023-11-10 13:38:44.710914 +00:00', 'scrimmage-triggers-user-sign-up', 'User Signed Up', 'https://scrimmage.co/wp-content/uploads/2023/08/cropped-Group-143-270x270.png', '', '0.0.1', '0.0.1', '9999.0.1', '{}', '{"user-sign-up": {"name": "user-sign-up", "displayName": "User Signed Up", "description": "Get triggered when user signs up", "type": "WEBHOOK", "props": {}}}', 'WwbA3xIZlm7B42m4qrnNC', null, 'CUSTOM', 'ARCHIVE', 'ctaXU1IYev5AXIFJoRmCv');
