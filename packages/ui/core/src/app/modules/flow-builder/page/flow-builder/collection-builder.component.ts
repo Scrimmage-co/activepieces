@@ -104,6 +104,7 @@ export class CollectionBuilderComponent implements OnInit, OnDestroy {
   };
   setTitle$: Observable<void>;
   hideHeader: boolean;
+  showPoweredByAp$: Observable<boolean>;
   constructor(
     private store: Store,
     private actRoute: ActivatedRoute,
@@ -123,7 +124,7 @@ export class CollectionBuilderComponent implements OnInit, OnDestroy {
     const urlParamsRaw = window.location.search;
     const urlParams = new URLSearchParams(urlParamsRaw);
     this.hideHeader = urlParams.get('hideHeader') === 'true';
-
+    this.showPoweredByAp$ = this.flagService.getShowPoweredByAp();
     this.listenToGraphChanges();
     this.dataInsertionPopupHidden$ =
       this.builderAutocompleteService.currentAutocompleteInputId$.pipe(

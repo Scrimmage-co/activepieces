@@ -1,6 +1,9 @@
-import { KeyAlgorithm, SigningKey, Platform } from '@activepieces/ee-shared'
-import { UserStatus, User, apId, Project, NotificationStatus, ProjectType } from '@activepieces/shared'
+import { KeyAlgorithm, SigningKey, Platform, OAuthApp, FilteredPieceBehavior } from '@activepieces/ee-shared'
+import { UserStatus, User, apId, Project, NotificationStatus, ProjectType, PieceType, PackageType } from '@activepieces/shared'
+import { OAuthAppWithEncryptedSecret } from '../../src/app/ee/oauth-apps/oauth-app.entity'
+import { encryptString } from '../../src/app/helper/encryption'
 import { faker } from '@faker-js/faker'
+import { PieceMetadataSchema } from '../../src/app/pieces/piece-metadata-entity'
 
 export const createMockUser = (user?: Partial<User>): User => {
     return {
@@ -17,6 +20,18 @@ export const createMockUser = (user?: Partial<User>): User => {
         imageUrl: user?.imageUrl ?? faker.image.urlPlaceholder(),
         title: user?.title ?? faker.lorem.sentence(),
         externalId: user?.externalId ?? apId(),
+    }
+}
+
+export const createMockOAuthApp = (oAuthApp?: Partial<OAuthApp>): OAuthAppWithEncryptedSecret => {
+    return {
+        id: oAuthApp?.id ?? apId(),
+        created: oAuthApp?.created ?? faker.date.recent().toISOString(),
+        updated: oAuthApp?.updated ?? faker.date.recent().toISOString(),
+        platformId: oAuthApp?.platformId ?? apId(),
+        pieceName: oAuthApp?.pieceName ?? faker.lorem.word(),
+        clientId: oAuthApp?.clientId ?? apId(),
+        clientSecret: encryptString(faker.lorem.word()),
     }
 }
 
@@ -41,10 +56,22 @@ export const createMockPlatform = (platform?: Partial<Platform>): Platform => {
         updated: platform?.updated ?? faker.date.recent().toISOString(),
         ownerId: platform?.ownerId ?? apId(),
         name: platform?.name ?? faker.lorem.word(),
-        primaryColor: platform?.primaryColor ??  faker.color.rgb(),
+        primaryColor: platform?.primaryColor ?? faker.color.rgb(),
         logoIconUrl: platform?.logoIconUrl ?? faker.image.urlPlaceholder(),
         fullLogoUrl: platform?.fullLogoUrl ?? faker.image.urlPlaceholder(),
         favIconUrl: platform?.favIconUrl ?? faker.image.urlPlaceholder(),
+        filteredPieceNames: platform?.filteredPieceNames ?? [],
+        filteredPieceBehavior: platform?.filteredPieceBehavior ?? faker.helpers.enumValue(FilteredPieceBehavior),
+        smtpHost: platform?.smtpHost ?? faker.internet.domainName(),
+        smtpPort: platform?.smtpPort ?? faker.datatype.number(),
+        smtpUser: platform?.smtpUser ?? faker.internet.userName(),
+        smtpPassword: platform?.smtpPassword ?? faker.internet.password(),
+        smtpUseSSL: platform?.smtpUseSSL ?? faker.datatype.boolean(),
+        smtpSenderEmail: platform?.smtpSenderEmail ?? faker.internet.email(),
+        privacyPolicyUrl: platform?.privacyPolicyUrl ?? faker.internet.url(),
+        termsOfServiceUrl: platform?.termsOfServiceUrl ?? faker.internet.url(),
+        cloudAuthEnabled: platform?.cloudAuthEnabled ?? faker.datatype.boolean(),
+        showPoweredBy: platform?.showPoweredBy ?? faker.datatype.boolean(),
     }
 }
 
@@ -70,7 +97,30 @@ export const createMockSigningKey = (signingKey?: Partial<SigningKey>): SigningK
         displayName: signingKey?.displayName ?? faker.lorem.word(),
         platformId: signingKey?.platformId ?? apId(),
         publicKey: signingKey?.publicKey ?? MOCK_SIGNING_KEY_PUBLIC_KEY,
-        generatedBy: signingKey?.generatedBy ??  apId(),
+        generatedBy: signingKey?.generatedBy ?? apId(),
         algorithm: signingKey?.algorithm ?? KeyAlgorithm.RSA,
+    }
+}
+
+export const createMockPieceMetadata = (pieceMetadata?: Partial<Omit<PieceMetadataSchema, 'project'>>): Omit<PieceMetadataSchema, 'project'> => {
+    return {
+        id: pieceMetadata?.id ?? apId(),
+        created: pieceMetadata?.created ?? faker.date.recent().toISOString(),
+        updated: pieceMetadata?.updated ?? faker.date.recent().toISOString(),
+        name: pieceMetadata?.name ?? faker.lorem.word(),
+        displayName: pieceMetadata?.displayName ?? faker.lorem.word(),
+        logoUrl: pieceMetadata?.logoUrl ?? faker.image.urlPlaceholder(),
+        description: pieceMetadata?.description ?? faker.lorem.sentence(),
+        projectId: pieceMetadata?.projectId,
+        directoryName: pieceMetadata?.directoryName,
+        auth: pieceMetadata?.auth,
+        version: pieceMetadata?.version ?? faker.system.semver(),
+        minimumSupportedRelease: pieceMetadata?.minimumSupportedRelease ?? '0.0.0',
+        maximumSupportedRelease: pieceMetadata?.maximumSupportedRelease ?? '9.9.9',
+        actions: pieceMetadata?.actions ?? {},
+        triggers: pieceMetadata?.triggers ?? {},
+        pieceType: pieceMetadata?.pieceType ?? faker.helpers.enumValue(PieceType),
+        packageType: pieceMetadata?.packageType ?? faker.helpers.enumValue(PackageType),
+        archiveId: pieceMetadata?.archiveId,
     }
 }
