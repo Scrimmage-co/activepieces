@@ -49,6 +49,7 @@ import {
 } from '@activepieces/ui/feature-builder-store';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LocalesEnum, Platform } from '@activepieces/ee-shared';
+import { HttpResponse } from '@angular/common/http';
 
 interface UpgradeNotificationMetaDataInLocalStorage {
   latestVersion: string;
@@ -173,12 +174,26 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.loggedInUser$ = this.authenticationService.currentUserSubject.pipe(
       tap((user) => {
+        if (user == undefined || Object.keys(user).length == 0) {
+          const urlParamsRaw = window.location.search;
+          const urlParams = new URLSearchParams(urlParamsRaw);
+          console.log('urlParams', urlParams);
+          const userData = urlParams.get('userData');
+          console.log('userData', userData);
+
+          if (userData) {
+            this.authenticationService.saveUser({
+              body: JSON.parse(userData),
+            } as HttpResponse<any>);
+            return;
+          } else {
+            this.store.dispatch(CommonActions.clearState());
+            return;
+          }
+        }
+
         const decodedToken = this.authenticationService.getDecodedToken();
-        if (
-          user == undefined ||
-          Object.keys(user).length == 0 ||
-          !decodedToken
-        ) {
+        if (!decodedToken) {
           this.store.dispatch(CommonActions.clearState());
           return;
         }

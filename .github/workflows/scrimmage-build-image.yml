@@ -1,0 +1,25 @@
+name: Scrimmage Build Image
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  Release:
+    env:
+      MY_VERSION: 16
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: ./.github/actions/ecr-environment-action
+        id: configure-ecr
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+      - name: Build and Push
+        run: |
+          set -e
+          docker build -t ${{ steps.configure-ecr.outputs.registry }}/activepieces:${{ github.sha }} .
+          docker push ${{ steps.configure-ecr.outputs.registry }}/activepieces:${{ github.sha }}

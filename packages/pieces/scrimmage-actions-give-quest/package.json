@@ -1,0 +1,7 @@
+{
+  "name": "@scrimmage/piece-scrimmage-actions-give-quest",
+  "version": "0.1.2",
+  "dependencies": {
+    "@scrimmage/pieces-common": "0.1.1"
+  }
+}

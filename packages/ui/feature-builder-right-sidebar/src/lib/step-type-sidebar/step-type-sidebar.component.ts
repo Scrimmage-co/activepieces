@@ -96,7 +96,7 @@ export class StepTypeSidebarComponent implements OnInit, AfterViewInit {
     this.focusSearchInput$ = this.actions.pipe(
       ofType(CanvasActionType.SET_RIGHT_SIDEBAR),
       tap(() => {
-        this.searchInput.nativeElement.focus();
+        this.searchInput?.nativeElement?.focus();
       }),
       map(() => void 0)
     );
@@ -134,7 +134,7 @@ export class StepTypeSidebarComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.searchInput.nativeElement.focus();
+      this.searchInput?.nativeElement?.focus();
     }, 350);
   }
 
@@ -144,6 +144,11 @@ export class StepTypeSidebarComponent implements OnInit, AfterViewInit {
     const coreItemsDetails$ = this._showTriggers
       ? this.store.select(BuilderSelectors.selectFlowItemDetailsForCoreTriggers)
       : this.store.select(BuilderSelectors.selectCoreFlowItemsDetails);
+    const gamificationItemsDetails$ = this._showTriggers
+      ? this.store.select(
+          BuilderSelectors.selectFlowItemDetailsForGamificationTriggers
+        )
+      : this.store.select(BuilderSelectors.selectGamificationFlowItemsDetails);
     const customPiecesItemDetails$ = this._showTriggers
       ? this.store.select(
           BuilderSelectors.selectFlowItemDetailsForCustomPiecesTriggers
@@ -162,15 +167,22 @@ export class StepTypeSidebarComponent implements OnInit, AfterViewInit {
         );
       })
     );
+
     this.tabsAndTheirLists.push({
-      displayName: $localize`All`,
-      list$: this.applySearchToObservable(allItemDetails$),
+      displayName: $localize`Gamification`,
+      list$: this.applySearchToObservable(gamificationItemsDetails$),
       emptyListText: $localize`Oops! We didn't find any results.`,
     });
 
     this.tabsAndTheirLists.push({
       displayName: $localize`Core`,
       list$: this.applySearchToObservable(coreItemsDetails$),
+      emptyListText: $localize`Oops! We didn't find any results.`,
+    });
+
+    this.tabsAndTheirLists.push({
+      displayName: $localize`All`,
+      list$: this.applySearchToObservable(allItemDetails$),
       emptyListText: $localize`Oops! We didn't find any results.`,
     });
 

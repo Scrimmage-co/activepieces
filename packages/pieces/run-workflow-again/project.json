@@ -1,0 +1,44 @@
+{
+  "name": "pieces-run-workflow-again",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/pieces/run-workflow-again/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/packages/pieces/run-workflow-again",
+        "tsConfig": "packages/pieces/run-workflow-again/tsconfig.lib.json",
+        "packageJson": "packages/pieces/run-workflow-again/package.json",
+        "main": "packages/pieces/run-workflow-again/src/index.ts",
+        "assets": [
+          "packages/pieces/run-workflow-again/*.md"
+        ],
+        "buildableProjectDepsInPackageJsonType": "dependencies",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs pieces-run-workflow-again {args.ver} {args.tag}",
+      "dependsOn": [
+        "build"
+      ]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "packages/pieces/run-workflow-again/**/*.ts",
+          "packages/pieces/run-workflow-again/package.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

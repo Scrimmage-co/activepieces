@@ -184,10 +184,43 @@
       ],
       "@activepieces/piece-retune": ["packages/pieces/retune/src/index.ts"],
       "@activepieces/piece-rss": ["packages/pieces/rss/src/index.ts"],
+      "@activepieces/piece-run-workflow-again": [
+        "packages/pieces/run-workflow-again/src/index.ts"
+      ],
       "@activepieces/piece-salesforce": [
         "packages/pieces/salesforce/src/index.ts"
       ],
       "@activepieces/piece-schedule": ["packages/pieces/schedule/src/index.ts"],
+      "@scrimmage/piece-scrimmage-actions-give-quest": [
+        "packages/pieces/scrimmage-actions-give-quest/src/index.ts"
+      ],
+      "@scrimmage/piece-scrimmage-actions-give-quests": [
+        "packages/pieces/scrimmage-actions-give-quests/src/index.ts"
+      ],
+      "@scrimmage/piece-scrimmage-actions-give-random-quests": [
+        "packages/pieces/scrimmage-actions-give-random-quests/src/index.ts"
+      ],
+      "@activepieces/piece-scrimmage-on-game-event": [
+        "packages/pieces/scrimmage-on-game-event/src/index.ts"
+      ],
+      "@activepieces/piece-scrimmage-quests": [
+        "packages/pieces/scrimmage-quests/src/index.ts"
+      ],
+      "@scrimmage/piece-scrimmage-triggers-quest-completed": [
+        "packages/pieces/scrimmage-triggers-quest-completed/src/index.ts"
+      ],
+      "@scrimmage/piece-scrimmage-triggers-redeem-made": [
+        "packages/pieces/scrimmage-triggers-redeem-made/src/index.ts"
+      ],
+      "@scrimmage/piece-scrimmage-triggers-rewardable-event-received": [
+        "packages/pieces/scrimmage-triggers-rewardable-event-received/src/index.ts"
+      ],
+      "@scrimmage/piece-scrimmage-triggers-user-level-up": [
+        "packages/pieces/scrimmage-triggers-user-level-up/src/index.ts"
+      ],
+      "@scrimmage/piece-scrimmage-triggers-user-sign-up": [
+        "packages/pieces/scrimmage-triggers-user-sign-up/src/index.ts"
+      ],
       "@activepieces/piece-sendfox": ["packages/pieces/sendfox/src/index.ts"],
       "@activepieces/piece-sendgrid": ["packages/pieces/sendgrid/src/index.ts"],
       "@activepieces/piece-sendinblue": [
@@ -197,6 +230,7 @@
       "@activepieces/piece-sessions-us": [
         "packages/pieces/sessions-us/src/index.ts"
       ],
+      "@activepieces/piece-sendy": ["packages/pieces/sendy/src/index.ts"],
       "@activepieces/piece-sftp": ["packages/pieces/sftp/src/index.ts"],
       "@activepieces/piece-shopify": ["packages/pieces/shopify/src/index.ts"],
       "@activepieces/piece-simplepdf": [
@@ -244,6 +278,7 @@
       ],
       "@activepieces/piece-zoom": ["packages/pieces/zoom/src/index.ts"],
       "@activepieces/pieces-common": ["packages/pieces/common/src/index.ts"],
+      "@scrimmage/pieces-common": ["packages/pieces/scrimmage-common/src/index.ts"],
       "@activepieces/pieces-framework": [
         "packages/pieces/framework/src/index.ts"
       ],

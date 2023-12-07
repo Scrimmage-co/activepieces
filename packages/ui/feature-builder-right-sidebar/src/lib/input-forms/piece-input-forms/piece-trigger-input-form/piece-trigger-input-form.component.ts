@@ -188,7 +188,8 @@ export class PieceTriggerInputFormComponent {
           items.find(
             (i) =>
               i.value.triggerName ===
-              this.initialComponentTriggerInputFormValue?.triggerName
+                this.initialComponentTriggerInputFormValue?.triggerName ||
+              items.length === 1
           )?.value,
           {
             emitEvent: false,
@@ -198,7 +199,8 @@ export class PieceTriggerInputFormComponent {
         items.find(
           (it) =>
             it.value.triggerName ===
-            this.initialComponentTriggerInputFormValue?.triggerName
+              this.initialComponentTriggerInputFormValue?.triggerName ||
+            items.length === 1
         )
       ).pipe(
         tap((selectedTrigger) => {

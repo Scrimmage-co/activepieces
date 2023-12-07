@@ -1,0 +1,102 @@
+Building (CI is there):
+1. docker buildx build --platform linux/amd64 --build-arg BUILDKIT_INLINE_CACHE=1 --progress=plain .
+2. aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 473860850071.dkr.ecr.us-east-2.amazonaws.com
+3. docker tag b2f9c9f46b3340e06f5458f6074cb17beead89196cfe4e9f26ba79daf217eaec 473860850071.dkr.ecr.us-east-2.amazonaws.com/activepieces
+4. docker push 473860850071.dkr.ecr.us-east-2.amazonaws.com/activepieces
+5. Add service to the congress
+
+"activepieces": {
+  "deployment": {
+    "image": "473860850071.dkr.ecr.us-east-2.amazonaws.com/activepieces:latest",
+    "port": 80,
+    "environments": {
+      "AP_API_KEY": "secret",
+      "AP_DB_TYPE": "POSTGRES",
+      "AP_EDITION": "ce",
+      "AP_LICENSE_KEY": "1234567890",
+      "AP_ENVIRONMENT": "prod",
+      "AP_ENCRYPTION_KEY": "7e19fad4c13eaea8f657afb12e8f9c40",
+      "AP_EXECUTION_MODE": "SANDBOXED",
+      "AP_JWT_SECRET": "super-secret",
+      "AP_POSTGRES_DATABASE": "activepieces",
+      "AP_POSTGRES_HOST": "scrimmage-db.{{ .Release.Namespace }}.svc.cluster.local",
+      "AP_POSTGRES_PORT": "5432",
+      "AP_QUEUE_MODE": "MEMORY",
+      "AP_SIGN_UP_ENABLED": "true",
+      "AP_FRONTEND_URL": "https://{{ .Release.Namespace }}.apps.scrimmage.co/_workflows/",
+      "AP_WEBHOOK_URL": "https://{{ .Release.Namespace }}.apps.scrimmage.co/_workflows/",
+      "SCRIMMAGE_PARTNER_ID": "{{ .Release.Namespace }}",
+      "AP_POSTGRES_USERNAME": "zbmyveax",
+      "AP_POSTGRES_PASSWORD": "BAMMXj+hW4l12fq5S3334ainGurX"
+    },
+    "resources": {
+      "requests": {
+        "cpu": "500m",
+        "memory": "800Mi"
+      },
+      "limits": {
+        "cpu": "800m",
+        "memory": "800Mi"
+      }
+    }
+  },
+  "scaling": {
+    "minReplicas": 1,
+    "maxReplicas": 10,
+    "cpuUtilization": 70,
+    "memoryUtilization": 80
+  },
+  "ingress": {
+    "baseDomain": "apps.scrimmage.co",
+    "path": "/_workflows/(.*)"
+  }
+}
+
+Setup:
+1. Create new user in DB
+
+INSERT INTO "user" ("id", "created", "updated", "email", "firstName", "lastName", "password", "status", "trackEvents", "newsLetter", "imageUrl", "title", "externalId") VALUES
+('WwbA3xIZlm7B42m4qrnNC', '2023-11-02 10:38:14', '2023-11-02 10:38:14', 'dev@ap.com', 'firstName', 'lastName', '$2b$10$uWW5m56gVjLzLWvak6VMoOjb8iqIId5NZ6oQnAiwwwljAU9/d.FCK', 'VERIFIED', '0', '0', NULL, NULL, NULL);
+
+2. Create new project in DB
+
+INSERT INTO "project" ("id", "created", "updated", "ownerId", "displayName", "notifyStatus", "type", "platformId", "externalId") VALUES
+('WwbA3xIZlm7B42m4qrnNC', '2023-11-02 10:38:14', '2023-11-02 10:38:14', 'WwbA3xIZlm7B42m4qrnNC', 'firstName''s Project', 'ALWAYS', 'STANDALONE', NULL, NULL);
+
+
+3. Create default folders
+
+insert into public.folder (id, created, updated, "displayName", "projectId")
+values  ('quests', '2023-11-09 12:57:23.951328 +00:00', '2023-11-09 12:57:23.951328 +00:00', 'Quest Flows', 'WwbA3xIZlm7B42m4qrnNC'),
+        ('notifications', '2023-11-09 12:57:58.005098 +00:00', '2023-11-09 12:57:58.005098 +00:00', 'Notification Flows', 'WwbA3xIZlm7B42m4qrnNC'),
+        ('other', '2023-11-09 12:57:58.005098 +00:00', '2023-11-09 12:57:58.005098 +00:00', 'Other Flows', 'WwbA3xIZlm7B42m4qrnNC');
+4. Add security context to the activepieces container
+  securityContext:
+    capabilities:
+      add:
+        - NET_ADMIN
+        - SYS_TIME
+    privileged: true
+    runAsUser: 0
+    allowPrivilegeEscalation: true
+5. Add all pieces using NPM
+6. Add auth for pieces
+
+---
+Locally <base href="/" />, in production <base href="/_workflows/" />
+
+
+userData=
+{"id":"WwbA3xIZlm7B42m4qrnNC","created":"2023-11-02T10:38:14.000Z","updated":"2023-11-02T10:38:14.000Z","email":"dev@ap.com","firstName":"firstName","lastName":"lastName","status":"VERIFIED","trackEvents":false,"newsLetter":false,"imageUrl":null,"title":null,"externalId":null,"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjEifQ.eyJpZCI6Ild3YkEzeElabG03QjQybTRxcm5OQyIsInR5cGUiOiJVU0VSIiwicHJvamVjdElkIjoiTHhpT2FtMkNiSndaSmYxekwyVVVYIiwicHJvamVjdFR5cGUiOiJTVEFOREFMT05FIiwiaWF0IjoxNjk5MzQ5NDQ3LCJleHAiOjIzMDQxNDk0NDcsImlzcyI6ImFjdGl2ZXBpZWNlcyJ9.We41_his95wJ0de6TBXYAq8gCSYvg-Q5w4m9lC8xvAs","projectId":"LxiOam2CbJwZJf1zL2UUX"}
+
+hideHeader=true
+
+kubectl cp -n nanachi ./activepieces-piece-scrimmage-triggers-user-sign-up-0.0.1.tgz activepieces-799cd594b6-7mgcd:/usr/src/app/dist/packages/pieces/activepieces-piece-scrimmage-triggers-user-sign-up-0.0.1.tgz
+
+insert into public.piece_metadata (id, created, updated, name, displayName, logoUrl, description, version, minimumSupportedRelease, maximumSupportedRelease, actions, triggers, projectId, auth, pieceType, packageType, archiveId)
+values  ('2', '2023-11-10 13:38:44.710914 +00:00', '2023-11-10 13:38:44.710914 +00:00', 'scrimmage-triggers-user-sign-up', 'User Signed Up', 'https://scrimmage.co/wp-content/uploads/2023/08/cropped-Group-143-270x270.png', '', '0.0.1', '0.0.1', '9999.0.1', '{}', '{"user-sign-up": {"name": "user-sign-up", "displayName": "User Signed Up", "description": "Get triggered when user signs up", "type": "WEBHOOK", "props": {}}}', 'WwbA3xIZlm7B42m4qrnNC', null, 'CUSTOM', 'ARCHIVE', 'ctaXU1IYev5AXIFJoRmCv');
+
+---
+https://nanachi.apps.scrimmage.co
+2rIS8NxVYE3G1kUVfBLt02vZ3M64ExjQI2yzKlxX2OKbaURiIr4b4zut6sk31UA9
+6cHTvzb9WztuDnd6nzcyScoks7syrS1K9fmNugrbsfdct575fju2vZpwxgzSSRTp

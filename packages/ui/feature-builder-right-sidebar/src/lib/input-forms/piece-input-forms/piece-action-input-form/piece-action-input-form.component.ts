@@ -217,7 +217,8 @@ export class PieceActionInputFormComponent
           items.find(
             (i) =>
               i.value.actionName ===
-              this.initialComponentInputFormValue?.actionName
+                this.initialComponentInputFormValue?.actionName ||
+              items.length === 1
           )?.value,
           {
             emitEvent: false,
@@ -227,7 +228,8 @@ export class PieceActionInputFormComponent
         items.find(
           (it) =>
             it.value.actionName ===
-            this.initialComponentInputFormValue?.actionName
+              this.initialComponentInputFormValue?.actionName ||
+            items.length === 1
         )
       ).pipe(
         tap((selectedAction) => {
