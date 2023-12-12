@@ -144,32 +144,32 @@ export class AppComponent implements OnInit {
       );
   }
 
-  private registerSearchIconIntoMaterialIconRegistery() {
-    this.maticonRegistry.addSvgIcon(
-      'info',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        '../assets/img/custom/info.svg'
-      )
-    );
-    this.maticonRegistry.addSvgIcon(
-      'search',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        '../assets/img/custom/search.svg'
-      )
-    );
-    this.maticonRegistry.addSvgIcon(
-      'custom_expand_less',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        '../assets/img/custom/expand_less.svg'
-      )
-    );
-    this.maticonRegistry.addSvgIcon(
-      'custom_expand_more',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        '../assets/img/custom/expand_more.svg'
-      )
-    );
-  }
+    private registerSearchIconIntoMaterialIconRegistery() {
+        this.maticonRegistry.addSvgIcon(
+            'info',
+            this.domSanitizer.bypassSecurityTrustResourceUrl(
+                '/_workflows/assets/img/custom/info.svg'
+            )
+        );
+        this.maticonRegistry.addSvgIcon(
+            'search',
+            this.domSanitizer.bypassSecurityTrustResourceUrl(
+                '/_workflows/assets/img/custom/search.svg'
+            )
+        );
+        this.maticonRegistry.addSvgIcon(
+            'custom_expand_less',
+            this.domSanitizer.bypassSecurityTrustResourceUrl(
+                '/_workflows/assets/img/custom/expand_less.svg'
+            )
+        );
+        this.maticonRegistry.addSvgIcon(
+            'custom_expand_more',
+            this.domSanitizer.bypassSecurityTrustResourceUrl(
+                '/_workflows/assets/img/custom/expand_more.svg'
+            )
+        );
+    }
 
   ngOnInit(): void {
     this.loggedInUser$ = this.authenticationService.currentUserSubject.pipe(

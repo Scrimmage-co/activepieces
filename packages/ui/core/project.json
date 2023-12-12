@@ -11,6 +11,7 @@
         "{options.outputPath}"
       ],
       "options": {
+        "baseHref": "/_workflows/",
         "statsJson": true,
         "outputPath": "dist/packages/ui/core",
         "index": "packages/ui/core/src/index.html",
