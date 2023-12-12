@@ -106,6 +106,7 @@ export class FlowBuilderComponent implements OnInit, OnDestroy {
   };
   setTitle$?: Observable<void>;
   showPoweredByAp$: Observable<boolean>;
+  hideHeader: boolean;
   constructor(
     private store: Store,
     private actRoute: ActivatedRoute,
@@ -122,6 +123,9 @@ export class FlowBuilderComponent implements OnInit, OnDestroy {
     private telemetryService: TelemetryService,
     public builderAutocompleteService: BuilderAutocompleteMentionsDropdownService
   ) {
+    const urlParamsRaw = window.location.search;
+    const urlParams = new URLSearchParams(urlParamsRaw);
+    this.hideHeader = urlParams.get('hideHeader') === 'true';
     this.showPoweredByAp$ = this.flagService.getShowPoweredByAp();
     this.listenToGraphChanges();
     this.dataInsertionPopupHidden$ =
