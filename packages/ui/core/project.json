@@ -11,6 +11,7 @@
         "{options.outputPath}"
       ],
       "options": {
+        "baseHref": "/_workflows/",
         "plugins": [
           {
             "path": "packages/ui/core/esbuild-plugin.js"
@@ -46,6 +47,11 @@
             "glob": "**/*",
             "input": "node_modules/monaco-editor",
             "output": "/assets/monaco/"
+          },
+          {
+            "glob": "**/*",
+            "input": "node_modules/monaco-editor",
+            "output": "/_workflows/assets/monaco/"
           }
         ],
         "styles": [

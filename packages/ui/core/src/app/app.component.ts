@@ -102,19 +102,19 @@ export class AppComponent implements OnInit {
     this.maticonRegistry.addSvgIcon(
       'search',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        '../assets/img/custom/search.svg'
+        '/_workflows/assets/img/custom/search.svg'
       )
     );
     this.maticonRegistry.addSvgIcon(
       'custom_expand_less',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        '../assets/img/custom/expand_less.svg'
+        '/_workflows/assets/img/custom/expand_less.svg'
       )
     );
     this.maticonRegistry.addSvgIcon(
       'custom_expand_more',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        '../assets/img/custom/expand_more.svg'
+        '/_workflows/assets/img/custom/expand_more.svg'
       )
     );
   }

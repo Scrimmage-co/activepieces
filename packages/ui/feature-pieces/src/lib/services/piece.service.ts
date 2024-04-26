@@ -15,28 +15,28 @@ export class PieceMetadataService {
         type: ActionType.CODE,
         name: 'Code',
         description: 'Powerful nodejs & typescript code with npm',
-        logoUrl: '/assets/img/custom/piece/code.svg',
+        logoUrl: '/_workflows/assets/img/custom/piece/code.svg',
     }
 
     private BRANCH_ITEM_DETAILS = {
         type: ActionType.BRANCH,
         name: 'Branch',
         description: 'Decide what happens based on an if condition result',
-        logoUrl: '/assets/img/custom/piece/branch.svg',
+        logoUrl: '/_workflows/assets/img/custom/piece/branch.svg',
     }
 
     private LOOP_ITEM_DETAILS = {
         type: ActionType.LOOP_ON_ITEMS,
         name: 'Loop',
         description: 'Loop on a list of items',
-        logoUrl: '/assets/img/custom/piece/loop.svg',
+        logoUrl: '/_workflows/assets/img/custom/piece/loop.svg',
     }
 
     private EMPTY_TRIGGER_ITEM_DETAILS = {
         type: TriggerType.EMPTY,
         name: 'Empty Trigger',
         description: 'Choose a trigger',
-        logoUrl: '/assets/img/custom/piece/empty-trigger.svg',
+        logoUrl: '/_workflows/assets/img/custom/piece/empty-trigger.svg',
     }
 
     private CORE_ACTIONS_DETAILS: FlowItemDetails[] = [
