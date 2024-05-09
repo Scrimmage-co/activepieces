@@ -1,0 +1,7 @@
+{
+  "name": "@scrimmage/activepieces-scrimmage-rewards",
+  "version": "0.1.0",
+  "dependencies": {
+    "@scrimmage/schemas": "^1.4.0"
+  }
+}

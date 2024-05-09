@@ -236,6 +236,9 @@
       "@activepieces/piece-gravityforms": [
         "packages/pieces/community/gravityforms/src/index.ts"
       ],
+      "@scrimmage/activepieces-scrimmage-rewards": [
+        "packages/pieces/community/scrimmage-rewards/src/index.ts"
+      ],
       "@activepieces/piece-hackernews": [
         "packages/pieces/community/hackernews/src/index.ts"
       ],
