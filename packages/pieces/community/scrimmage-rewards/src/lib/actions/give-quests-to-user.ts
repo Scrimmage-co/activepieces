@@ -36,7 +36,7 @@ export const giveQuestsToUser = createAction({
         return {
           disabled: false,
           options: response.map((template) => ({
-            label: `${template.id}: ${template.description}`,
+            label: `${template.id}: ${template.title || template.description}`,
             value: template.id,
           }))
         };
